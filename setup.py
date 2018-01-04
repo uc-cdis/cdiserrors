@@ -8,12 +8,11 @@ setup(
     license="Apache",
     packages=find_packages(),
     install_requires=[
-        'cdispyutils',
-        'requests==2.7.0',
+        'cdisutils',
         'Flask==0.10.1',
         'Werkzeug==0.12.2',
     ],
     dependency_links=[
-        'git+ssh://git@github.com/uc-cdis/cdis-python-utils.git@754173fe68a4a84f7c214b4444c8d365b54dfd56#egg=cdispyutils',
+        'git+ssh://git@github.com/NCI-GDC/cdisutils.git@a79409a0ce5071a81c6997d4ed1549c3544fbdcd#egg=cdisutils',
     ],
 )

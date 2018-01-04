@@ -1,7 +1,7 @@
 from flask import jsonify
 from werkzeug.exceptions import default_exceptions
 from werkzeug.exceptions import HTTPException
-import cdispyutils
+from cdisutils.log import get_logger
 
 
 class APIError(Exception):
@@ -98,7 +98,7 @@ class SchemaError(Exception):
 
     def __init__(self, message, e=None):
         if e:
-            log = cdispyutils.log.get_logger(__name__)
+            log = get_logger(__name__)
             log.exception(e)
         message = "{}: {}".format(message, e) if e else message
         super(SchemaError, self).__init__(message)
