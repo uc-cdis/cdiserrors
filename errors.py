@@ -85,9 +85,9 @@ class BaseUnsupportedError(UserError):
             json = {}
         message = (
             "Format {} is not supported; supported formats are: {}."
-            .format(file_format, ",".join(self.supported_formas))
+            .format(file_format, ",".join(self.supported_formats))
         )
-        super(UnsupportedError, self).__init__(message, code, json)
+        super(BaseUnsupportedError, self).__init__(message, code, json)
 
 
 class ParsingError(Exception):
