@@ -9,6 +9,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'cdispyutils',
+        'requests==2.7.0',
         'Flask==0.10.1',
         'Werkzeug==0.12.2',
     ],
