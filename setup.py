@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="autherrors",
+    name="cdiserrors",
     version='0.0.1',
     description="The auth system for the gdcapi.",
     license="Apache",
