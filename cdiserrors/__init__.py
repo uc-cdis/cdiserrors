@@ -34,6 +34,17 @@ class UserError(APIError):
             json = {}
         super(UserError, self).__init__(message, code, json)
 
+class BaseUnsupportedError(UserError):
+    def __init__(self, file_format, code=400, json=None):
+        if json is None:
+            json = {}
+        message = (
+            "Format {} is not supported; supported formats are: {}."
+            .format(file_format, ",".join(self.supported_formats))
+        )
+        super(BaseUnsupportedError, self).__init__(message, code, json)
+
+
 class UnsupportedError(BaseUnsupportedError):
     def __init__(self, file_format, code=400, json=None):
         self.supported_formats = []
@@ -72,17 +83,6 @@ class ServiceUnavailableError(APIError):
     def __init__(self, message, code=503):
         self.message = message
         self.code = code
-
-class BaseUnsupportedError(UserError):
-    def __init__(self, file_format, code=400, json=None):
-        if json is None:
-            json = {}
-        message = (
-            "Format {} is not supported; supported formats are: {}."
-            .format(file_format, ",".join(self.supported_formats))
-        )
-        super(BaseUnsupportedError, self).__init__(message, code, json)
-
 class ParsingError(Exception):
     pass
 
