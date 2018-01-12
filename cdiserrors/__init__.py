@@ -34,6 +34,11 @@ class UserError(APIError):
             json = {}
         super(UserError, self).__init__(message, code, json)
 
+class UnsupportedError(BaseUnsupportedError):
+    def __init__(self, file_format, code=400, json=None):
+        self.supported_formats = []
+        super(UnsupportedError, self).__init__(message, code, json)
+
 class AuthError(APIError):
     def __init__(self, message=None, code=403, json=None):
         if json is None:
@@ -88,6 +93,11 @@ class SchemaError(Exception):
             log.exception(e)
         message = "{}: {}".format(message, e) if e else message
         super(SchemaError, self).__init__(message)
+
+class UnhealthyCheck(APIError):
+    def __init__(self, message):
+        self.message = str(message)
+        self.code = 500
 
 def make_json_error(ex):
     response = jsonify(message=str(ex))
