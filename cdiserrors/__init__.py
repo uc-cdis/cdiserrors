@@ -44,12 +44,6 @@ class BaseUnsupportedError(UserError):
         )
         super(BaseUnsupportedError, self).__init__(message, code, json)
 
-
-class UnsupportedError(BaseUnsupportedError):
-    def __init__(self, file_format, code=400, json=None):
-        self.supported_formats = []
-        super(UnsupportedError, self).__init__(message, code, json)
-
 class AuthError(APIError):
     def __init__(self, message=None, code=403, json=None):
         if json is None:
