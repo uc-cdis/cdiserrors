@@ -8,11 +8,11 @@ setup(
     license="Apache",
     packages=find_packages(),
     install_requires=[
-        'cdisutils',
+        'cdislogging',
         'Flask==0.10.1',
         'Werkzeug==0.12.2',
     ],
     dependency_links=[
-        'git+ssh://git@github.com/NCI-GDC/cdisutils.git@a79409a0ce5071a81c6997d4ed1549c3544fbdcd#egg=cdisutils',
+        'git+https://git@github.com/uc-cdis/cdislogging.git@0.0.2#egg=cdislogging',
     ],
 )
