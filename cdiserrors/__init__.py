@@ -34,6 +34,16 @@ class UserError(APIError):
             json = {}
         super(UserError, self).__init__(message, code, json)
 
+class BaseUnsupportedError(UserError):
+    def __init__(self, file_format, code=400, json=None):
+        if json is None:
+            json = {}
+        message = (
+            "Format {} is not supported; supported formats are: {}."
+            .format(file_format, ",".join(self.supported_formats))
+        )
+        super(BaseUnsupportedError, self).__init__(message, code, json)
+
 class AuthError(APIError):
     def __init__(self, message=None, code=403, json=None):
         if json is None:
@@ -67,17 +77,6 @@ class ServiceUnavailableError(APIError):
     def __init__(self, message, code=503):
         self.message = message
         self.code = code
-
-class BaseUnsupportedError(UserError):
-    def __init__(self, file_format, code=400, json=None):
-        if json is None:
-            json = {}
-        message = (
-            "Format {} is not supported; supported formats are: {}."
-            .format(file_format, ",".join(self.supported_formats))
-        )
-        super(BaseUnsupportedError, self).__init__(message, code, json)
-
 class ParsingError(Exception):
     pass
 
@@ -88,6 +87,11 @@ class SchemaError(Exception):
             log.exception(e)
         message = "{}: {}".format(message, e) if e else message
         super(SchemaError, self).__init__(message)
+
+class UnhealthyCheck(APIError):
+    def __init__(self, message):
+        self.message = str(message)
+        self.code = 500
 
 def make_json_error(ex):
     response = jsonify(message=str(ex))
