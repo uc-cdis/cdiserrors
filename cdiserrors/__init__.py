@@ -44,14 +44,42 @@ class BaseUnsupportedError(UserError):
         )
         super(BaseUnsupportedError, self).__init__(message, code, json)
 
+
 class AuthError(APIError):
+    """
+    Authorization Error. This is for any case that user
+    has valid authentication but is unauthorized to access
+    particular resources
+
+    This is deprecated, should use AuthZError explicitly
+    """
     def __init__(self, message=None, code=403, json=None):
         if json is None:
             json = {}
-        auth_message = "You don't have access to this data"
+        auth_message = "You don't have access to this resource"
         if message is not None:
             auth_message += ': {}'.format(message)
         super(AuthError, self).__init__(auth_message, code, json)
+
+
+class AuthZError(AuthError):
+    """
+    Authorization Error. This is for any case that user
+    has valid authentication but is unauthorized to access
+    particular resources
+    """
+    pass
+
+class AuthNError(APIError):
+    """
+    Authentication Error. This is for any case that user
+    is not authenticated or authenticated incorrectly
+    """
+    def __init__(self, message=None, code=401, json=None):
+        if message is not None:
+            message = "Authentication Error: {}".format(message)
+        super(AuthNError, self).__init__(message, code, json)
+
 
 class InvalidTokenError(AuthError):
     def __init__(self):
@@ -61,6 +89,7 @@ class InvalidTokenError(AuthError):
         )
         self.code = 403
 
+
 class InternalError(APIError):
     def __init__(self, message=None, code=500):
         self.message = "Internal server error"
@@ -68,17 +97,16 @@ class InternalError(APIError):
             self.message += ': {}'.format(message)
         self.code = code
 
-class NotFoundError(APIError):
-    def __init__(self, message):
-        super(NotFoundError, self).__init__(message, 404, None)
-
 
 class ServiceUnavailableError(APIError):
     def __init__(self, message, code=503):
         self.message = message
         self.code = code
+
+
 class ParsingError(Exception):
     pass
+
 
 class SchemaError(Exception):
     def __init__(self, message, e=None):
