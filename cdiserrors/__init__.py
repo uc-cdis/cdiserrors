@@ -128,5 +128,5 @@ def make_json_error(ex):
     return response
 
 def setup_default_handlers(app):
-    for code in default_exceptions.iterkeys():
+    for code in default_exceptions:
         app.register_error_handler(code, make_json_error)
