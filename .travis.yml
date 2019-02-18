@@ -1,0 +1,19 @@
+language: python
+dist: xenial
+python:
+- 2.7
+- 3.5
+- 3.6
+- 3.7
+install:
+- pip install pipenv
+- pipenv install --dev
+script: pipenv run py.test -v
+deploy:
+  provider: pypi
+  user: uc-ctds
+  skip_existing: true
+  on:
+    tags: true
+  password:
+    secure: oASuhPKw4uHPmBzTrQfEIQKPmdcWBUircIK7xWGsZH8hI587raF7avRSigIdFAa8HG3j3QuQ6J2ZbEYEvWHHwhwq8O/2RvNQpJVDqw9aeBj+QZMpMr/qB6NcwVy8HknvaoCN0uUriH4Th1g8iSn7//BCMwYkGNxcfF8iNO8zLTFJ7xt66J8cXjBznxr1Xv6RTiOqGUsUkEwT2cjSB4HnFTPsX28Aa9Qryifu66QSOh1Qpjg1cXbehJMscPQOv6TtCpdrIKAzyKMCVo+M3S9klfDTFHJUdDzpknpKvfsoc0EHagl/tIQShJLsOzG2UXjIRkkysfLY6PeYnszo6hxs7/rzp+NVMSHrHj8OfO28tq8bJApOYMm3k9LEDfsu2IubsUpDOhJOgAOeIY8ibGIjvEHPzxINThPD87KHjg4O0WyM+GC0ckDmG3msOwnP66fSDu95epOH8mD9HwnCF1/Q9DgSJ+0lmc6D5S2p5YgX7MplmlcdxgHfvIEmd9hxnSfe0FgcohqKAfHPvyTkHDb2XKQBcCl7YVwv8w88ZTXFwUEyiOVywQgqsENzQ21b8dvOHE5oEDsBt2CcDiP0Px4mGfvzMhDFa5udmQsfN/3rKa2GdcFXLHPDJcR8ByfPhdfyYVTS18j/1gUn8OqH9ZR/wp0HiejOb+UF0+XitCdd1kI=
