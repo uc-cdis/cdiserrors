@@ -146,10 +146,8 @@ try:
 
 except ImportError:
 
-    # noinspection PyUnusedLocal
     def make_json_error(ex):
         raise NotImplementedError("Flask is not installed")
 
-    # noinspection PyUnusedLocal
     def setup_default_handlers(app):
         raise NotImplementedError("Flask is not installed")
