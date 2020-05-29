@@ -1,4 +1,4 @@
 include LICENSE
 include NOTICE
-include Pipfile
-include Pipfile.lock
+include pyproject.toml
+include poetry.lock
